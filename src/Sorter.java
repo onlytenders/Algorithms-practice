@@ -1,23 +1,49 @@
 import java.util.ArrayList;
 
 public class Sorter {
-    public ArrayList<Integer> selectionSortInt(ArrayList<Integer> list) {
-        ArrayList<Integer> new_list = new ArrayList<>();
-        int size = list.size();
-        int prev_smallest = -1;
-        for (int i = 0; i < size; i++) {
-            int index = 0;
-            int smallest = list.get(0);
-            for (int j = 0; j < list.size(); j++) {
-                if (list.get(j) < smallest && list.get(j) > prev_smallest) {
-                    smallest = list.get(j);
-                    index = j;
+    public int[] selectionSortInt(int[] list) {
+        for (int i = 0; i < list.length; i++) {
+            int smallest = list[i];
+            int smallest_i = i;
+            for (int j = i+1; j < list.length; j++) {
+                if (list[j] < smallest) {
+                    smallest = list[j];
+                    smallest_i = j;
                 }
             }
-            list.remove(index);
-            prev_smallest = smallest;
-            new_list.add(smallest);
+            int tmp = list[i];
+            list[i] = smallest;
+            list[smallest_i] = tmp;
         }
-        return new_list;
+        return list;
+    }
+
+    public int[] bubbleSortInt(int[] arr) {
+        boolean isSorted = false;
+        while (!isSorted) {
+            isSorted = true;
+            for (int i = 1; i < arr.length; i++) {
+                if (arr[i] < arr[i-1]) {
+                    int tmp = arr[i];
+                    arr[i] = arr[i-1];
+                    arr[i-1] = tmp;
+                    isSorted = false;
+                }
+            }
+        }
+        return arr;
+    }
+
+    public int[] insertionSort(int[] arr) {
+        for (int i = 1; i < arr.length; i++) {
+            int current = arr[i];
+            int j = i - 1;
+            while(j >= 0 && current < arr[j]) {
+                arr[j+1] = arr[j];
+                j--;
+            }
+            arr[j+1] = current;
+        }
+        return arr;
     }
 }
