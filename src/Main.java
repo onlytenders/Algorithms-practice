@@ -1,15 +1,22 @@
-import java.util.ArrayList;
-import java.util.List;
-
 public class Main {
     public static void main(String[] args) {
-        int[] arr = {5,6,2,5,7};
+        GraphConnection[] graph = {
+                new GraphConnection("S", "A", 4),
+                new GraphConnection("S", "C", 8),
+                new GraphConnection("S", "D", 2),
+                new GraphConnection("A", "B", 7),
+                new GraphConnection("A", "C", 5),
+                new GraphConnection("D", "C", 5),
+                new GraphConnection("D", "E", 3),
+                new GraphConnection("C", "B", 3),
+                new GraphConnection("C", "F", 6),
+                new GraphConnection("C", "E", 7),
+                new GraphConnection("B", "F", 2),
+                new GraphConnection("E", "F", 8)
+        };
 
-        Sorter sort = new Sorter();
-        arr = sort.insertionSort(arr);
-
-        for (int i : arr) {
-            System.out.print(i + " ");
-        }
+        Dijkstra algo = new Dijkstra();
+        int result = algo.weightedSearch(graph, "S", "F");
+        System.out.println(result);
     }
 }
